@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Corporate Bankruptcy Prediction System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="hero-section text-center">
+
+        <h1>Corporate Bankruptcy Prediction System</h1>
+
+        <p>
+            AI-powered bankruptcy prediction using XGBoost
+        </p>
+
+    </div>
+
+    <form action="/predict" method="POST">
+
+        <div class="accordion" id="financeAccordion">
+
+            <!-- Assets -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#assetsSection">
+
+                        Assets
+
+                    </button>
+
+                </h2>
+
+                <div id="assetsSection"
+                     class="accordion-collapse collapse">
+
+                    <div class="accordion-body">
+
+                        <input id="current_assets"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="current_assets"
+                               placeholder="Current Assets"
+                               required>
+
+                        <input id="inventory"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="inventory"
+                               placeholder="Inventory"
+                               required>
+
+                        <input id="receivables"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="receivables"
+                               placeholder="Total Receivables"
+                               required>
+
+                        <input id="total_assets"
+                               class="form-control"
+                               type="number"
+                               step="any"
+                               name="total_assets"
+                               placeholder="Total Assets"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Revenue -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#revenueSection">
+
+                        Revenue & Profitability
+
+                    </button>
+
+                </h2>
+
+                <div id="revenueSection"
+                     class="accordion-collapse collapse">
+
+                    <div class="accordion-body">
+
+                        <input id="revenue"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="revenue"
+                               placeholder="Total Revenue"
+                               required>
+
+                        <input id="net_sales"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="net_sales"
+                               placeholder="Net Sales"
+                               required>
+
+                        <input id="gross_profit"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="gross_profit"
+                               placeholder="Gross Profit"
+                               required>
+
+                        <input id="net_income"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="net_income"
+                               placeholder="Net Income"
+                               required>
+
+                        <input id="ebit"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="ebit"
+                               placeholder="EBIT"
+                               required>
+
+                        <input id="ebitda"
+                               class="form-control"
+                               type="number"
+                               step="any"
+                               name="ebitda"
+                               placeholder="EBITDA"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Liabilities -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#liabilitiesSection">
+
+                        Liabilities
+
+                    </button>
+
+                </h2>
+
+                <div id="liabilitiesSection"
+                     class="accordion-collapse collapse">
+
+                    <div class="accordion-body">
+
+                        <input id="liabilities"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="liabilities"
+                               placeholder="Total Liabilities"
+                               required>
+
+                        <input id="current_liabilities"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="current_liabilities"
+                               placeholder="Current Liabilities"
+                               required>
+
+                        <input id="long_term_debt"
+                               class="form-control"
+                               type="number"
+                               step="any"
+                               name="long_term_debt"
+                               placeholder="Long-Term Debt"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Other -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#otherSection">
+
+                        Other Financial Information
+
+                    </button>
+
+                </h2>
+
+                <div id="otherSection"
+                     class="accordion-collapse collapse">
+
+                    <div class="accordion-body">
+
+                        <input id="retained_earnings"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="retained_earnings"
+                               placeholder="Retained Earnings"
+                               required>
+
+                        <input id="operating_expenses"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="operating_expenses"
+                               placeholder="Operating Expenses"
+                               required>
+
+                        <input id="market_value"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="market_value"
+                               placeholder="Market Value"
+                               required>
+
+                        <input id="depreciation"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="depreciation"
+                               placeholder="Depreciation & Amortization"
+                               required>
+
+                        <input id="cogs"
+                               class="form-control mb-3"
+                               type="number"
+                               step="any"
+                               name="cogs"
+                               placeholder="Cost of Goods Sold"
+                               required>
+
+                        <input id="year"
+                               class="form-control"
+                               type="number"
+                               step="any"
+                               name="year"
+                               placeholder="Year"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+
+            <button type="button"
+                    class="btn btn-outline-secondary"
+                    onclick="loadSampleData()">
+
+                Load Sample Company Data
+
+            </button>
+
+            <button class="btn btn-primary btn-lg"
+                    type="submit">
+
+                Predict Bankruptcy
+
+            </button>
+
+        </div>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="card result-card mt-5">
+
+        <div class="card-body text-center">
+
+            <h2>
+                Bankruptcy Risk Assessment
+            </h2>
+
+            <h1 class="text-{{ color }}">
+                {{ risk }} RISK
+            </h1>
+
+            <h5 class="mt-4">
+                Bankruptcy Probability
+            </h5>
+
+            <h1>
+                {{ probability }}%
+            </h1>
+
+            <div class="progress mt-4">
+
+                <div class="progress-bar bg-{{ color }}"
+                     role="progressbar"
+                     style="width: {{ probability }}%;">
+
+                </div>
+
+            </div>
+
+            <p class="mt-4 fs-5">
+                {{ message }}
+            </p>
+
+            <hr>
+
+            <p>
+                Prediction:
+                <strong>{{ prediction }}</strong>
+            </p>
+
+            <p>
+                Model: XGBoost
+            </p>
+
+            <p>
+                ROC-AUC: 0.86
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
