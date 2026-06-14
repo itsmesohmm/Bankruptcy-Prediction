@@ -301,24 +301,60 @@
 
         </div>
 
-        <div class="d-grid gap-2 mt-4">
+        <div class="row mt-4">
 
-            <button type="button"
-                    class="btn btn-outline-secondary"
-                    onclick="loadSampleData()">
+    <div class="col-md-4 mb-2">
 
-                Load Sample Company Data
+        <button
+            type="button"
+            class="btn btn-success w-100"
+            onclick="loadLowRisk()">
 
-            </button>
+            Load Low Risk Company
 
-            <button class="btn btn-primary btn-lg"
-                    type="submit">
+        </button>
 
-                Predict Bankruptcy
+    </div>
 
-            </button>
+    <div class="col-md-4 mb-2">
 
-        </div>
+        <button
+            type="button"
+            class="btn btn-warning w-100"
+            onclick="loadModerateRisk()">
+
+            Load Moderate Risk Company
+
+        </button>
+
+    </div>
+
+    <div class="col-md-4 mb-2">
+
+        <button
+            type="button"
+            class="btn btn-danger w-100"
+            onclick="loadHighRisk()">
+
+            Load High Risk Company
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="d-grid mt-3">
+
+    <button
+        class="btn btn-primary btn-lg"
+        type="submit">
+
+        Predict Bankruptcy
+
+    </button>
+
+</div>
 
     </form>
 
